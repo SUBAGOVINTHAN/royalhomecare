@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
-const PHONE_DISPLAY = '+91 9626081301'
-const PHONE_HREF = 'tel:+919626081301'
-const WHATSAPP_NUMBER = '919626081301' // country code + number, no "+" or spaces
+const PHONE_DISPLAY = '+91 95001 60491'
+const PHONE_HREF = 'tel:+919500160491'
+const WHATSAPP_NUMBER = '919500160491' // country code + number, no "+" or spaces
 const WHATSAPP_CHAT_HREF = `https://wa.me/${WHATSAPP_NUMBER}`
 
 const APPLIANCE_GROUPS = [
