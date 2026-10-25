@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import logo from '../assets/logo.jpeg'
 
@@ -28,6 +28,34 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('#top')
+  const headerRef = useRef(null)
+
+  // Close menu, then scroll to the section once the menu has finished collapsing
+  const goTo = (e, href) => {
+    e.preventDefault()
+    setActive(href)
+    setOpen(false)
+    window.setTimeout(() => {
+      const headerH = headerRef.current ? headerRef.current.offsetHeight : 0
+      const el = href === '#top' ? null : document.querySelector(href)
+      const top = el ? el.getBoundingClientRect().top + window.scrollY - headerH : 0
+      window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' })
+      window.history.replaceState(null, '', href)
+    }, 300)
+  }
+
+  // Close on Escape, and if the screen grows to desktop size
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => e.key === 'Escape' && setOpen(false)
+    const onResize = () => window.innerWidth >= 1024 && setOpen(false)
+    window.addEventListener('keydown', onKey)
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [open])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -37,7 +65,25 @@ export default function Navbar() {
   }, [])
 
   return (
+    <>
+    {/* Outside-click backdrop (mobile menu) */}
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          key="backdrop"
+          aria-hidden="true"
+          onClick={() => setOpen(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+        />
+      )}
+    </AnimatePresence>
+
     <header
+      ref={headerRef}
       className={`fixed inset-x-0 top-0 z-50 bg-white transition-shadow duration-300 ${
         scrolled ? 'shadow-[0_4px_24px_rgba(11,42,91,0.08)]' : 'shadow-none'
       }`}
@@ -46,7 +92,7 @@ export default function Navbar() {
         {/* Logo — highlighted with a soft gold halo and a pulse ring on load */}
         <a
           href="#top"
-          onClick={() => setActive('#top')}
+          onClick={(e) => goTo(e, '#top')}
           className="focus-ring group flex items-center gap-3 rounded-full"
         >
           <div className="relative flex h-14 w-14 items-center justify-center">
@@ -194,10 +240,7 @@ export default function Navbar() {
                     <a
                       key={link.href}
                       href={link.href}
-                      onClick={() => {
-                        setActive(link.href)
-                        setOpen(false)
-                      }}
+                      onClick={(e) => goTo(e, link.href)}
                       className={`focus-ring flex items-center justify-between py-3.5 font-sans text-base font-medium ${
                         isActive ? 'text-navy-deep' : 'text-navy-deep/80'
                       }`}
@@ -250,7 +293,7 @@ export default function Navbar() {
               {/* CTA */}
               <a
                 href="#contact"
-                onClick={() => setOpen(false)}
+                onClick={(e) => goTo(e, '#contact')}
                 className="focus-ring mt-4 flex h-12 w-full items-center justify-center rounded-full text-sm font-semibold text-navy-deep"
                 style={{ backgroundColor: 'var(--color-gold)' }}
               >
@@ -261,5 +304,6 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </header>
+    </>
   )
 }
