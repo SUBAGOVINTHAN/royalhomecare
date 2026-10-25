@@ -11,10 +11,10 @@ const LINKS = [
   { href: '#contact', label: 'Contact' },
 ]
 
-const PHONE_DISPLAY = '+91 9626081301'
-const PHONE_HREF = 'tel:+919626081301'
+const PHONE_DISPLAY = '+91 95001 60491'
+const PHONE_HREF = 'tel:+919500160491'
 const WHATSAPP_HREF =
-  'https://wa.me/919626081301?text=Hi%20Royal%20Home%20Care%2C%20I%20would%20like%20to%20book%20a%20service.'
+  'https://wa.me/919500160491?text=Hi%20Royal%20Home%20Care%2C%20I%20would%20like%20to%20book%20a%20service.'
 
 function WhatsAppIcon({ size = 20 }) {
   return (
