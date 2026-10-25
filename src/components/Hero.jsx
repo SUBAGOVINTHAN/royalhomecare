@@ -143,10 +143,10 @@ export default function Hero() {
               and commercial AC services, we deliver reliable solutions for your home and business.
             </motion.p>
 
-            <motion.div variants={item} className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <motion.div variants={item} className="mt-6 flex flex-col gap-2.5 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <a
                 href="#contact"
-                className="focus-ring inline-flex w-full items-center justify-center gap-2.5 rounded-full px-8 py-4 font-sans text-base font-bold shadow-lg sm:w-auto shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 font-sans text-sm font-bold shadow-lg shadow-black/20 sm:w-auto sm:gap-2.5 sm:px-8 sm:py-4 sm:text-base transition-all hover:-translate-y-0.5 hover:shadow-xl"
                 style={{ backgroundColor: GOLD_BRIGHT, color: NAVY }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -159,7 +159,7 @@ export default function Hero() {
 
               <a
                 href={PHONE_HREF}
-                className="focus-ring inline-flex w-full items-center justify-center gap-2.5 rounded-full border-2 border-white/60 px-7 py-[0.9rem] sm:w-auto font-sans text-base font-semibold text-white transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
+                className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-white/60 px-6 py-[0.6rem] font-sans text-sm font-semibold sm:w-auto sm:gap-2.5 sm:px-7 sm:py-[0.9rem] sm:text-base text-white transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path
