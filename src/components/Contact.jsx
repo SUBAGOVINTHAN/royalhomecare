@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { motion, MotionConfig } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
-const PHONE_DISPLAY = '+91 95001 60491'
-const PHONE_HREF = 'tel:+919500160491'
-const WHATSAPP_NUMBER = '919500160491' // country code + number, no "+" or spaces
+const PHONE_DISPLAY = '+91 9626081301'
+const PHONE_HREF = 'tel:+919626081301'
+const WHATSAPP_NUMBER = '919626081301' // country code + number, no "+" or spaces
 const WHATSAPP_CHAT_HREF = `https://wa.me/${WHATSAPP_NUMBER}`
 
 const APPLIANCE_GROUPS = [
@@ -31,14 +31,24 @@ const viewport = { once: true, amount: 0.2 }
 
 const SERVICE_TYPES = ['Installation', 'Repair', 'Maintenance (AMC)', 'Something else']
 
+const EMPTY_FORM = {
+  name: '',
+  phone: '',
+  service: '',
+  serviceType: '',
+  message: '',
+}
+
 export default function Contact() {
-  const [form, setForm] = useState({
-    name: '',
-    phone: '',
-    service: '',
-    serviceType: '',
-    message: '',
-  })
+  const [form, setForm] = useState(EMPTY_FORM)
+  const [sent, setSent] = useState(false)
+
+  // Hide the confirmation note after a few seconds
+  useEffect(() => {
+    if (!sent) return
+    const t = window.setTimeout(() => setSent(false), 6000)
+    return () => window.clearTimeout(t)
+  }, [sent])
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }))
 
@@ -60,6 +70,9 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault()
     window.open(buildWhatsAppHref(), '_blank', 'noopener,noreferrer')
+    // Clear the form once WhatsApp has been opened with the message
+    setForm(EMPTY_FORM)
+    setSent(true)
   }
 
   return (
@@ -202,7 +215,7 @@ export default function Contact() {
                 type="text"
                 required
                 className="field"
-                placeholder="Your name"
+                placeholder=""
               />
             </Field>
             <Field label="Phone number" htmlFor="phone">
@@ -220,7 +233,7 @@ export default function Contact() {
                 pattern="[0-9]{10}"
                 title="Enter exactly 10 digits"
                 className="field"
-                placeholder="10-digit mobile number"
+                placeholder=""
               />
             </Field>
             <Field label="Appliance / System" htmlFor="service">
@@ -295,6 +308,22 @@ export default function Contact() {
                 Send on WhatsApp
               </span>
             </motion.button>
+
+            <AnimatePresence>
+              {sent && (
+                <motion.p
+                  key="sent-note"
+                  role="status"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3 }}
+                  className="col-span-full rounded-xl bg-green-50 px-4 py-3 text-center text-sm font-medium text-green-800"
+                >
+                  WhatsApp opened with your details. Tap send there to confirm your request.
+                </motion.p>
+              )}
+            </AnimatePresence>
           </motion.form>
         </motion.div>
       </div>
