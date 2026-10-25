@@ -30,21 +30,18 @@ const SERVICES = [
     title: 'AC Installation',
     group: 'ac',
     desc: 'Split, window and inverter AC units mounted, wired and pressure-tested for a clean first start.',
-    icon: IconInstall,
     photo: photoInstall,
   },
   {
     title: 'AC Repair',
     group: 'ac',
     desc: 'Gas leaks, drainage issues, odd noises and cooling drops diagnosed and fixed the same visit, wherever possible.',
-    icon: IconRepair,
     photo: photoRepair,
   },
   {
     title: 'AC Maintenance (AMC)',
     group: 'ac',
     desc: 'Scheduled filter cleaning, coil servicing and gas top-ups so your unit runs efficiently all year.',
-    icon: IconMaintenance,
     photo: photoMaintenance,
   },
 
@@ -53,7 +50,6 @@ const SERVICES = [
     title: 'Refrigerator',
     group: 'home',
     desc: 'Cooling loss, compressor and gas faults and thermostat repairs for single and double-door models.',
-    icon: IconFridge,
     photo: photoRefrigerator,
     pos: '70% center',
   },
@@ -61,7 +57,6 @@ const SERVICES = [
     title: 'Microwave Oven',
     group: 'home',
     desc: 'Heating faults, turntable and control-panel problems repaired for solo, grill and convection ovens.',
-    icon: IconMicrowave,
     photo: photoMicrowave,
     pos: '50% center',
   },
@@ -69,7 +64,6 @@ const SERVICES = [
     title: 'Washing Machine',
     group: 'home',
     desc: 'Drum, drain, spin and noise problems fixed for top-load and front-load machines.',
-    icon: IconWashing,
     photo: photoWashing,
     pos: '45% center',
   },
@@ -77,7 +71,6 @@ const SERVICES = [
     title: 'Deep Freezer',
     group: 'home',
     desc: 'Cooling and compressor checks, gas refilling and thermostat repairs for chest and upright freezers.',
-    icon: IconFreezer,
     photo: photoFreezer,
     pos: '65% center',
   },
@@ -87,7 +80,6 @@ const SERVICES = [
     title: '3 Phase AC',
     group: 'commercial',
     desc: 'Fault finding and servicing for three-phase AC units, including wiring, contactors and compressor checks.',
-    icon: IconBolt,
     photo: photoThreePhase,
     pos: '35% center',
   },
@@ -95,7 +87,6 @@ const SERVICES = [
     title: 'Cassette AC',
     group: 'commercial',
     desc: 'Cleaning, servicing and installation for ceiling cassette units in offices, showrooms and shops.',
-    icon: IconCassette,
     photo: photoCassette,
     pos: '45% center',
   },
@@ -103,7 +94,6 @@ const SERVICES = [
     title: 'Ductable AC',
     group: 'commercial',
     desc: 'Installation, servicing and airflow checks for ducted AC systems.',
-    icon: IconDuct,
     photo: photoDuctable,
     pos: '40% center',
   },
@@ -111,7 +101,6 @@ const SERVICES = [
     title: 'VRF / VRV AC',
     group: 'commercial',
     desc: 'Scheduled maintenance and fault finding for multi-zone VRF and VRV systems.',
-    icon: IconVrf,
     photo: photoVrf,
     pos: '40% center',
   },
@@ -119,7 +108,6 @@ const SERVICES = [
     title: 'Packaged AC',
     group: 'commercial',
     desc: 'Installation and servicing for rooftop and floor-standing packaged AC units.',
-    icon: IconPackaged,
     photo: photoPackaged,
     pos: '35% center',
   },
@@ -145,7 +133,7 @@ export default function Services() {
   const visible = filter === 'all' ? SERVICES : SERVICES.filter((s) => s.group === filter)
 
   return (
-    <section id="services" className="bg-cream px-6 py-24 lg:px-10">
+    <section id="services" className="bg-cream px-4 py-20 sm:px-6 sm:py-24 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <motion.div
           className="max-w-2xl"
@@ -158,11 +146,10 @@ export default function Services() {
             What we do
           </p>
           <h2 className="mt-3 font-display text-3xl font-semibold text-navy sm:text-4xl">
-            One team for cooling and home appliances.
+            Complete AC & Home Appliance Solutions
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink/70">
-            Book service for your AC, home appliances or commercial AC systems.
-            Every visit is scoped and quoted before we start.
+            From air conditioning to home appliance repairs, we provide reliable service for homes and businesses.
           </p>
         </motion.div>
 
@@ -170,7 +157,7 @@ export default function Services() {
         <div
           role="tablist"
           aria-label="Filter services"
-          className="mt-10 flex flex-wrap gap-2.5"
+          className="mt-8 flex flex-wrap gap-2 sm:mt-10 sm:gap-2.5"
         >
           {FILTERS.map((f) => {
             const active = filter === f.id
@@ -181,7 +168,7 @@ export default function Services() {
                 role="tab"
                 aria-selected={active}
                 onClick={() => setFilter(f.id)}
-                className="focus-ring rounded-full border px-5 py-2.5 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
+                className="focus-ring rounded-full border px-4 py-2 text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 sm:px-5 sm:py-2.5 sm:text-sm"
                 style={
                   active
                     ? {
@@ -202,20 +189,21 @@ export default function Services() {
           })}
         </div>
 
+        {/* 2 columns on mobile, 2 on tablet, 3 on desktop */}
         <motion.div
           key={filter}
-          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-6 lg:grid-cols-3"
           initial="hidden"
           animate="show"
           variants={grid}
         >
-          {visible.map(({ title, desc, icon: Icon, photo, pos }) => (
+          {visible.map(({ title, desc, photo, pos }) => (
             <motion.div
               key={title}
               variants={card}
               whileHover={{ y: -6 }}
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-              className="group relative overflow-hidden rounded-3xl bg-white shadow-[0_2px_16px_rgba(11,42,91,0.08)] transition-shadow duration-300 hover:shadow-[0_18px_40px_rgba(11,42,91,0.16)]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_16px_rgba(11,42,91,0.08)] transition-shadow duration-300 hover:shadow-[0_18px_40px_rgba(11,42,91,0.16)] sm:rounded-3xl"
             >
               {/* Photo */}
               <div className="relative aspect-[4/3] overflow-hidden">
@@ -228,26 +216,22 @@ export default function Services() {
                 />
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-navy-deep/70 via-navy-deep/0 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 via-navy-deep/0 to-transparent"
                 />
-
-                {/* Icon badge overlapping the photo */}
-                <span
-                  className="absolute -bottom-6 left-6 flex h-14 w-14 items-center justify-center rounded-2xl shadow-lg ring-4 ring-white transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-3"
-                  style={{ backgroundColor: 'var(--color-navy)' }}
-                >
-                  <Icon className="h-7 w-7 text-gold-light" />
-                </span>
               </div>
 
               {/* Text */}
-              <div className="px-6 pb-7 pt-10">
-                <h3 className="font-display text-lg font-semibold text-navy">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink/65">{desc}</p>
+              <div className="flex flex-1 flex-col px-3 pb-4 pt-3.5 sm:px-6 sm:pb-7 sm:pt-6">
+                <h3 className="font-display text-sm font-semibold leading-snug text-navy sm:text-lg">
+                  {title}
+                </h3>
+                <p className="mt-1.5 line-clamp-3 text-xs leading-relaxed text-ink/65 sm:mt-2 sm:line-clamp-none sm:text-sm">
+                  {desc}
+                </p>
 
                 <a
                   href="#contact"
-                  className="focus-ring mt-4 inline-flex items-center gap-1.5 text-sm font-semibold"
+                  className="focus-ring mt-auto inline-flex items-center gap-1.5 pt-3 text-xs font-semibold sm:pt-4 sm:text-sm"
                   style={{ color: 'var(--color-navy)' }}
                 >
                   Know More
@@ -275,128 +259,5 @@ export default function Services() {
         </motion.div>
       </div>
     </section>
-  )
-}
-
-/* ---------- Icons ---------- */
-
-const stroke = {
-  stroke: 'currentColor',
-  strokeWidth: 1.6,
-  strokeLinecap: 'round',
-  strokeLinejoin: 'round',
-}
-
-function IconInstall(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <rect x="3" y="6" width="18" height="7" rx="2" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M7 13v3M12 13v4M17 13v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M9 6V4.5M15 6V4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  )
-}
-function IconRepair(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path
-        d="M14.7 6.3a3.5 3.5 0 0 1-4.6 4.6L5 16l3 3 5.1-5.1a3.5 3.5 0 0 1 4.6-4.6l-2.3 2.3-2-2 2.3-2.3z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-function IconMaintenance(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="1.6" />
-      <path
-        d="M12 3.5v2M12 18.5v2M20.5 12h-2M5.5 12h-2M17.8 6.2l-1.4 1.4M7.6 16.4l-1.4 1.4M17.8 17.8l-1.4-1.4M7.6 7.6 6.2 6.2"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  )
-}
-function IconFridge(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <rect x="6" y="2.5" width="12" height="19" rx="2" {...stroke} />
-      <path d="M6 10h12M9 6v1.5M9 13v3" {...stroke} />
-    </svg>
-  )
-}
-function IconMicrowave(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <rect x="2.5" y="6" width="19" height="12" rx="2" {...stroke} />
-      <rect x="5.5" y="9" width="9" height="6" rx="1" {...stroke} />
-      <path d="M18 9.5h.01M18 12h.01M18 14.5h.01" {...stroke} strokeWidth="2.2" />
-    </svg>
-  )
-}
-function IconWashing(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <rect x="4" y="2.5" width="16" height="19" rx="2" {...stroke} />
-      <circle cx="12" cy="13.5" r="4.5" {...stroke} />
-      <path d="M7.5 6h2M15.5 6h.01" {...stroke} />
-    </svg>
-  )
-}
-function IconFreezer(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <rect x="3" y="8" width="18" height="12" rx="2" {...stroke} />
-      <path d="M3 12.5h18M9 8V6h6v2M10 16h4" {...stroke} />
-    </svg>
-  )
-}
-function IconBolt(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path d="M13 3 5 13h5l-1 8 8-10h-5l1-8z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-    </svg>
-  )
-}
-function IconCassette(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <rect x="3" y="3" width="18" height="18" rx="2" {...stroke} />
-      <rect x="7" y="7" width="10" height="10" rx="1.5" {...stroke} />
-      <circle cx="12" cy="12" r="1.6" {...stroke} />
-    </svg>
-  )
-}
-function IconDuct(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <rect x="2.5" y="8" width="9" height="8" rx="1.5" {...stroke} />
-      <path d="M11.5 10h4.5l4.5-3v10l-4.5-3h-4.5" {...stroke} />
-    </svg>
-  )
-}
-function IconVrf(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <circle cx="12" cy="12" r="2.5" {...stroke} />
-      <circle cx="5" cy="5" r="2" {...stroke} />
-      <circle cx="19" cy="5" r="2" {...stroke} />
-      <circle cx="5" cy="19" r="2" {...stroke} />
-      <circle cx="19" cy="19" r="2" {...stroke} />
-      <path d="M6.5 6.5l3.7 3.7M17.5 6.5l-3.7 3.7M6.5 17.5l3.7-3.7M17.5 17.5l-3.7-3.7" {...stroke} />
-    </svg>
-  )
-}
-function IconPackaged(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <rect x="2.5" y="6" width="19" height="12" rx="2" {...stroke} />
-      <circle cx="9" cy="12" r="3" {...stroke} />
-      <path d="M15 9.5h3.5M15 12h3.5M15 14.5h3.5" {...stroke} />
-    </svg>
   )
 }
