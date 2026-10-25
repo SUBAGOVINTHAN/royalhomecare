@@ -7,7 +7,7 @@ const CLIENTS = [
   },
   {
     name: 'Casa Grande Supremus',
-    detail: 'Residential AMC',
+    detail: 'Club House',
   },
   {
     name: 'Faro Import & Export',
@@ -40,10 +40,10 @@ export default function Clients() {
             Trusted By
           </p>
           <h2 className="mt-3 font-display text-3xl font-semibold text-navy sm:text-4xl">
-            23+ years of AMC and on-site service work
+            15+ years of AMC and on-site service work
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink/70">
-            From large-scale container AC contracts to residential and commercial AMC,
+            From large-scale container AC contracts to club house and commercial AMC,
             these are a few of the businesses we've kept running.
           </p>
         </motion.div>
@@ -60,10 +60,10 @@ export default function Clients() {
             className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full font-display text-lg font-bold text-white"
             style={{ backgroundColor: 'var(--color-navy)' }}
           >
-            23+
+            15+
           </span>
           <span className="text-sm font-medium text-ink/70">
-            Years of combined field experience across AC, plumbing and electrical work
+            Years of combined field experience across AC and home appliance service
           </span>
         </motion.div>
 

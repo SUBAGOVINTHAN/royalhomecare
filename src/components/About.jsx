@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useReveal } from '../hooks/useReveal'
+import logo from '../assets/logo.jpeg'
 
 const STATS = [
-  { value: 5, suffix: '+', label: 'Years serving local homes' },
-  { value: 500, suffix: '+', label: 'Installations & repairs completed' },
+  { value: 15, suffix: '+', label: 'Years serving local homes' },
+  { value: 2500, suffix: '+', label: 'Installations & repairs completed' },
   { value: 98, suffix: '%', label: 'Customers who rebook us' },
 ]
 
@@ -13,9 +14,7 @@ export default function About() {
   return (
     <section id="about" className="bg-white px-6 py-24 lg:px-10">
       <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="relative mx-auto aspect-[4/5] w-full max-w-sm">
-          <SealIllustration />
-        </div>
+        <LogoShowcase visible={visible} />
 
         <div ref={ref}>
           <p className="text-sm font-semibold text-navy">Who we are</p>
@@ -42,6 +41,46 @@ export default function About() {
         </div>
       </div>
     </section>
+  )
+}
+
+function LogoShowcase({ visible }) {
+  return (
+    <div className="relative mx-auto aspect-square w-full max-w-sm sm:max-w-md">
+      {/* Soft gold glow behind the logo */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-6 rounded-full blur-3xl"
+        style={{ background: 'radial-gradient(circle, rgba(217,164,48,0.35), transparent 70%)' }}
+      />
+
+      {/* Slowly rotating dashed ring */}
+      <div
+        aria-hidden="true"
+        className="absolute -inset-3 animate-[spin_50s_linear_infinite] rounded-full border-2 border-dashed motion-reduce:animate-none"
+        style={{ borderColor: 'rgba(217,164,48,0.55)' }}
+      />
+
+      {/* Thin navy outer ring */}
+      <div
+        aria-hidden="true"
+        className="absolute -inset-7 rounded-full border"
+        style={{ borderColor: 'rgba(11,42,91,0.12)' }}
+      />
+
+      {/* Logo */}
+      <div
+        className={`relative h-full w-full overflow-hidden rounded-full bg-white shadow-[0_24px_60px_rgba(11,42,91,0.22)] ring-1 ring-navy/10 transition-all duration-700 ease-out ${
+          visible ? 'scale-100 opacity-100' : 'scale-90 opacity-0'
+        }`}
+      >
+        <img
+          src={logo}
+          alt="Royal Home Care logo"
+          className="h-full w-full object-cover"
+        />
+      </div>
+    </div>
   )
 }
 
@@ -73,45 +112,5 @@ function Counter({ target, suffix, start }) {
       {value}
       {suffix}
     </span>
-  )
-}
-
-function SealIllustration() {
-  return (
-    <svg viewBox="0 0 320 360" className="h-full w-full">
-      <defs>
-        <linearGradient id="sealGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0e3468" />
-          <stop offset="100%" stopColor="#071b3f" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M160 12 L280 48 V172 C280 252 230 310 160 344 C90 310 40 252 40 172 V48 Z"
-        fill="url(#sealGrad)"
-        stroke="var(--color-gold)"
-        strokeWidth="2"
-      />
-      <path
-        d="M160 26 L266 58 V172 C266 245 222 296 160 328 C98 296 54 245 54 172 V58 Z"
-        fill="none"
-        stroke="rgba(217,164,48,0.4)"
-        strokeWidth="1"
-      />
-      {/* crown */}
-      <path
-        d="M120 130 L133 104 L150 124 L160 96 L170 124 L187 104 L200 130 L192 142 L128 142 Z"
-        fill="var(--color-gold)"
-      />
-      {/* house */}
-      <path d="M110 210 L160 172 L210 210 V266 H110 Z" fill="none" stroke="white" strokeWidth="2.5" />
-      <rect x="148" y="228" width="24" height="38" fill="none" stroke="white" strokeWidth="2" />
-      <path
-        d="M92 288c22-14 46-14 68 0s46 14 68 0"
-        stroke="var(--color-ice)"
-        strokeWidth="3"
-        fill="none"
-        strokeLinecap="round"
-      />
-    </svg>
   )
 }
