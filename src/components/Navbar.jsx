@@ -185,56 +185,73 @@ export default function Navbar() {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="overflow-hidden border-t border-navy-deep/10 bg-white lg:hidden"
           >
-            <div className="flex flex-col gap-1 px-6 py-4">
-              {LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => {
-                    setActive(link.href)
-                    setOpen(false)
-                  }}
-                  className="focus-ring rounded py-3 font-sans text-base font-medium text-navy-deep/85"
-                >
-                  {link.label}
-                </a>
-              ))}
+            <div className="max-h-[calc(100vh-5rem)] overflow-y-auto px-6 pb-6 pt-2">
+              {/* Links */}
+              <div className="flex flex-col divide-y divide-navy-deep/10">
+                {LINKS.map((link) => {
+                  const isActive = active === link.href
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => {
+                        setActive(link.href)
+                        setOpen(false)
+                      }}
+                      className={`focus-ring flex items-center justify-between py-3.5 font-sans text-base font-medium ${
+                        isActive ? 'text-navy-deep' : 'text-navy-deep/80'
+                      }`}
+                    >
+                      {link.label}
+                      {isActive && (
+                        <span
+                          aria-hidden="true"
+                          className="h-2 w-2 rounded-full"
+                          style={{ backgroundColor: 'var(--color-gold)' }}
+                        />
+                      )}
+                    </a>
+                  )
+                })}
+              </div>
 
-              <div className="flex items-center gap-3 py-2">
+              {/* Call + WhatsApp */}
+              <div className="mt-5 grid grid-cols-2 gap-3">
                 <a
                   href={PHONE_HREF}
-                  className="focus-ring flex flex-1 items-center gap-2 text-sm font-semibold text-navy-deep"
+                  className="focus-ring flex h-12 items-center justify-center gap-2 rounded-full text-sm font-semibold text-white"
+                  style={{ backgroundColor: 'var(--color-navy-deep)' }}
                 >
-                  <span
-                    className="flex h-9 w-9 items-center justify-center rounded-full text-white"
-                    style={{ backgroundColor: 'var(--color-navy-deep)' }}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </span>
-                  {PHONE_DISPLAY}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path
+                      d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  Call Now
                 </a>
 
                 <a
                   href={WHATSAPP_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Chat on WhatsApp"
-                  className="focus-ring flex h-10 w-10 items-center justify-center rounded-full text-white"
+                  className="focus-ring flex h-12 items-center justify-center gap-2 rounded-full text-sm font-semibold text-white"
                   style={{ backgroundColor: '#25D366' }}
                 >
-                  <WhatsAppIcon size={20} />
+                  <WhatsAppIcon size={18} />
+                  WhatsApp
                 </a>
               </div>
 
+              <p className="mt-3 text-center text-sm font-medium text-navy-deep/70">
+                {PHONE_DISPLAY}
+              </p>
+
+              {/* CTA */}
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="focus-ring mt-2 rounded-full px-5 py-3 text-center text-sm font-semibold text-navy-deep"
+                className="focus-ring mt-4 flex h-12 w-full items-center justify-center rounded-full text-sm font-semibold text-navy-deep"
                 style={{ backgroundColor: 'var(--color-gold)' }}
               >
                 Book Service
