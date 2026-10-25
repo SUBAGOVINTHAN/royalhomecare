@@ -1,12 +1,44 @@
 import { useState } from 'react'
+import { motion, MotionConfig } from 'framer-motion'
 
 const PHONE_DISPLAY = '+91 95001 60491'
 const PHONE_HREF = 'tel:+919500160491'
 const WHATSAPP_NUMBER = '919500160491' // country code + number, no "+" or spaces
 const WHATSAPP_CHAT_HREF = `https://wa.me/${WHATSAPP_NUMBER}`
 
+const APPLIANCE_GROUPS = [
+  {
+    label: 'Home Appliances',
+    items: ['Air Conditioning', 'Refrigerator', 'Microwave Oven', 'Washing Machine', 'Deep Freezer'],
+  },
+  {
+    label: 'Commercial AC Systems',
+    items: ['3 Phase AC', 'Cassette AC', 'Ductable AC', 'VRF / VRV AC', 'Packaged AC'],
+  },
+]
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } },
+}
+
+const item = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+}
+
+const viewport = { once: true, amount: 0.2 }
+
+const SERVICE_TYPES = ['Installation', 'Repair', 'Maintenance (AMC)', 'Something else']
+
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', phone: '', service: '', message: '' })
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    service: '',
+    serviceType: '',
+    message: '',
+  })
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }))
 
@@ -16,7 +48,8 @@ export default function Contact() {
       '',
       `*Name:* ${form.name}`,
       `*Phone:* ${form.phone}`,
-      `*Service needed:* ${form.service || 'Not specified'}`,
+      `*Appliance / System:* ${form.service}`,
+      `*Service type:* ${form.serviceType || 'Not specified'}`,
     ]
     if (form.message.trim()) {
       lines.push('', `*Details:* ${form.message.trim()}`)
@@ -31,45 +64,133 @@ export default function Contact() {
 
   return (
     <section id="contact" className="bg-cream px-6 py-24 lg:px-10">
+      <MotionConfig reducedMotion="user">
       <div className="mx-auto max-w-7xl">
-        <div className="grid overflow-hidden rounded-3xl border border-navy/10 bg-white shadow-xl shadow-navy/5 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="p-10 text-white lg:p-12" style={{ backgroundColor: 'var(--color-navy-deep)' }}>
-            <p className="text-sm font-semibold" style={{ color: 'var(--color-gold-light)' }}>
-              Get in touch
-            </p>
-            <h2 className="mt-3 font-display text-2xl font-semibold sm:text-3xl">
-              Let's sort your home comfort.
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-white/65">
-              Tell us what's going on and we'll get back with a time for a free
-              inspection — usually within a few hours.
-            </p>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="grid overflow-hidden rounded-3xl border border-navy/10 bg-white shadow-xl shadow-navy/5 lg:grid-cols-[0.9fr_1.1fr]"
+        >
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+            className="relative isolate flex flex-col justify-center overflow-hidden p-10 text-white lg:p-12"
+            style={{ backgroundColor: 'var(--color-navy-deep)' }}
+          >
+            {/* Soft breathing gold glow */}
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full blur-3xl"
+              style={{ background: 'radial-gradient(circle, rgba(217,164,48,0.35), transparent 70%)' }}
+              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-28 -left-20 -z-10 h-72 w-72 rounded-full blur-3xl"
+              style={{ background: 'radial-gradient(circle, rgba(80,130,220,0.30), transparent 70%)' }}
+              animate={{ scale: [1.15, 1, 1.15], opacity: [0.4, 0.8, 0.4] }}
+              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            />
 
-            <div className="mt-10 space-y-5 text-sm">
-              <a
+            <motion.p
+              variants={item}
+              className="text-sm font-semibold uppercase tracking-wider"
+              style={{ color: 'var(--color-gold-light)' }}
+            >
+              Get in touch
+            </motion.p>
+            <motion.h2
+              variants={item}
+              className="mt-3 font-display text-2xl font-semibold text-white sm:text-3xl"
+            >
+              Expert Care for Your Home & Commercial Appliances.
+            </motion.h2>
+            <motion.p
+              variants={item}
+              className="mt-4 max-w-md text-base leading-relaxed text-white/90"
+            >
+              Looking for reliable service for your air conditioner or home appliances? From refrigerators and washing machines to advanced commercial AC systems, our team is here to help.
+            </motion.p>
+
+            <div className="mt-10 space-y-6">
+              <motion.a
+                variants={item}
+                whileHover={{ x: 6 }}
                 href={PHONE_HREF}
-                className="focus-ring flex items-center gap-3 rounded text-white/85 hover:text-white"
+                className="focus-ring group flex items-center gap-4 rounded text-white"
               >
-                <IconPhone className="h-5 w-5" style={{ color: 'var(--color-gold-light)' }} />
-                {PHONE_DISPLAY}
-              </a>
-              <a
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-white/20">
+                  <motion.span
+                    className="flex"
+                    animate={{ rotate: [0, -14, 14, -10, 10, 0] }}
+                    transition={{ duration: 0.9, repeat: Infinity, repeatDelay: 3.5, ease: 'easeInOut' }}
+                  >
+                    <IconPhone className="h-5 w-5" style={{ color: 'var(--color-gold-light)' }} />
+                  </motion.span>
+                </span>
+                <span className="leading-tight">
+                  <span className="block text-xs text-white/70">Call us</span>
+                  <span className="mt-0.5 block text-base font-semibold">{PHONE_DISPLAY}</span>
+                </span>
+              </motion.a>
+
+              <motion.a
+                variants={item}
+                whileHover={{ x: 6 }}
                 href={WHATSAPP_CHAT_HREF}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring flex items-center gap-3 rounded text-white/85 hover:text-white"
+                className="focus-ring group flex items-center gap-4 rounded text-white"
               >
-                <WhatsAppIcon className="h-5 w-5" style={{ color: '#25D366' }} />
-                Chat on WhatsApp
-              </a>
-              <div className="flex items-center gap-3 text-white/85">
-                <IconClock className="h-5 w-5" style={{ color: 'var(--color-gold-light)' }} />
-                <span>Mon–Sun, 8:00 AM – 9:00 PM · 24/7 for emergencies</span>
-              </div>
-            </div>
-          </div>
+                <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-white/20">
+                  <motion.span
+                    aria-hidden="true"
+                    className="absolute inset-0 rounded-full"
+                    animate={{
+                      boxShadow: [
+                        '0 0 0 0 rgba(37,211,102,0.5)',
+                        '0 0 0 10px rgba(37,211,102,0)',
+                      ],
+                    }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: 'easeOut' }}
+                  />
+                  <WhatsAppIcon className="relative h-5 w-5" style={{ color: '#25D366' }} />
+                </span>
+                <span className="leading-tight">
+                  <span className="block text-xs text-white/70">WhatsApp</span>
+                  <span className="mt-0.5 block text-base font-semibold">Chat with us</span>
+                </span>
+              </motion.a>
 
-          <form
+              <motion.div variants={item} className="flex items-center gap-4 text-white">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10">
+                  <motion.span
+                    className="flex"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+                  >
+                    <IconClock className="h-5 w-5" style={{ color: 'var(--color-gold-light)' }} />
+                  </motion.span>
+                </span>
+                <span className="leading-tight">
+                  <span className="block text-xs text-white/70">Working hours</span>
+                  <span className="mt-0.5 block text-base font-semibold">Mon–Sun, 8:00 AM – 9:00 PM</span>
+                  <span className="mt-1 block text-sm text-white/90">24/7 for emergencies</span>
+                </span>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          <motion.form
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
             className="grid grid-cols-1 gap-5 p-10 sm:grid-cols-2 lg:p-12"
             onSubmit={handleSubmit}
           >
@@ -88,25 +209,53 @@ export default function Contact() {
               <input
                 id="phone"
                 value={form.phone}
-                onChange={update('phone')}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, phone: e.target.value.replace(/\D/g, '').slice(0, 10) }))
+                }
                 type="tel"
+                inputMode="numeric"
+                autoComplete="tel-national"
+                maxLength={10}
                 required
-                pattern="[0-9+\s\-]{10,15}"
-                title="Enter a valid phone number (10 digits)"
+                pattern="[0-9]{10}"
+                title="Enter exactly 10 digits"
                 className="field"
                 placeholder="10-digit mobile number"
               />
             </Field>
-            <Field label="Service needed" htmlFor="service" full>
-              <select id="service" value={form.service} onChange={update('service')} className="field">
-                <option value="">Select a service</option>
-                <option>AC Installation</option>
-                <option>AC Repair</option>
-                <option>AC Maintenance (AMC)</option>
-                <option>Plumbing</option>
-                <option>Electrical Work</option>
-                <option>Home Deep Cleaning</option>
-                <option>Something else</option>
+            <Field label="Appliance / System" htmlFor="service">
+              <select
+                id="service"
+                value={form.service}
+                onChange={update('service')}
+                required
+                className="field"
+              >
+                <option value="">Select appliance or system</option>
+                {APPLIANCE_GROUPS.map((group) => (
+                  <optgroup key={group.label} label={group.label}>
+                    {group.items.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </Field>
+            <Field label="Service type" htmlFor="serviceType">
+              <select
+                id="serviceType"
+                value={form.serviceType}
+                onChange={update('serviceType')}
+                className="field"
+              >
+                <option value="">Select service type</option>
+                {SERVICE_TYPES.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
               </select>
             </Field>
             <Field label="Details" htmlFor="message" full>
@@ -116,37 +265,52 @@ export default function Contact() {
                 onChange={update('message')}
                 rows={4}
                 className="field resize-none"
-                placeholder="Tell us what's happening and your area/locality"
+                placeholder=""
               />
             </Field>
 
-            <button
+            <motion.button
+              variants={item}
+              whileHover={{ y: -3, scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
               type="submit"
-              className="focus-ring col-span-full mt-1 inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-navy-deep shadow-md transition-transform hover:-translate-y-0.5"
+              className="focus-ring relative col-span-full mt-1 inline-flex items-center justify-center overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold text-navy-deep shadow-md"
               style={{ backgroundColor: 'var(--color-gold)' }}
             >
-              <WhatsAppIcon className="h-5 w-5" />
-              Send on WhatsApp
-            </button>
-            <p className="col-span-full text-xs text-ink/45">
-              This opens WhatsApp with your details already filled in. Just tap send to
-              reach us on {PHONE_DISPLAY}.
-            </p>
-          </form>
-        </div>
+              {/* Shine sweep */}
+              <motion.span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/4 -skew-x-12 bg-white/45"
+                animate={{ x: ['0%', '600%'] }}
+                transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 2.6, ease: 'easeInOut' }}
+              />
+              <span className="relative inline-flex items-center gap-2">
+                <motion.span
+                  className="flex"
+                  animate={{ rotate: [0, -12, 12, -8, 8, 0] }}
+                  transition={{ duration: 0.9, repeat: Infinity, repeatDelay: 3, ease: 'easeInOut' }}
+                >
+                  <WhatsAppIcon className="h-5 w-5" />
+                </motion.span>
+                Send on WhatsApp
+              </span>
+            </motion.button>
+          </motion.form>
+        </motion.div>
       </div>
+      </MotionConfig>
     </section>
   )
 }
 
 function Field({ label, htmlFor, full, children }) {
   return (
-    <div className={full ? 'sm:col-span-2' : ''}>
-      <label htmlFor={htmlFor} className="mb-1.5 block text-xs font-semibold text-ink/60">
+    <motion.div variants={item} className={full ? 'sm:col-span-2' : ''}>
+      <label htmlFor={htmlFor} className="mb-1.5 block text-sm font-semibold text-navy-deep">
         {label}
       </label>
       {children}
-    </div>
+    </motion.div>
   )
 }
 
