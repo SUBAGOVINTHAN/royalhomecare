@@ -6,8 +6,8 @@ const LINKS = [
   { href: '#top', label: 'Home' },
   { href: '#about', label: 'About' },
   { href: '#services', label: 'Services' },
-  { href: '#why-us', label: 'Why Us' },
-  { href: '#gallery', label: 'Gallery' },
+  { href: '#process', label: 'How It Works' },
+  { href: '#clients', label: 'Clients' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -135,14 +135,14 @@ export default function Navbar() {
         </a>
 
         {/* Center links */}
-        <nav className="hidden items-center gap-9 lg:flex">
+        <nav className="hidden items-center gap-6 xl:gap-9 lg:flex">
           {LINKS.map((link) => {
             const isActive = active === link.href
             return (
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setActive(link.href)}
+                onClick={(e) => goTo(e, link.href)}
                 className="focus-ring relative rounded pb-1 font-sans text-[15px] font-medium text-navy-deep/80 transition-colors hover:text-navy-deep"
               >
                 {link.label}
