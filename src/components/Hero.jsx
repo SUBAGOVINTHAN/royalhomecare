@@ -24,56 +24,127 @@ const item = {
   },
 }
 
-const SERVICES = [
+const S = {
+  stroke: 'currentColor',
+  strokeWidth: 1.6,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+  fill: 'none',
+}
+
+const SERVICE_GROUPS = [
   {
-    title: 'AC Installation',
-    desc: 'Professional installation for all types of ACs.',
-    icon: (
-      <path d="M4 8h16v3H4V8Zm2 3v7m2-7v9m8-9v9m2-9v7M9 22h6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" fill="none" />
-    ),
+    label: 'Home Appliances',
+    items: [
+      {
+        title: 'Air Conditioning',
+        desc: 'Installation, repair and maintenance.',
+        icon: (
+          <>
+            <rect x="3" y="4" width="18" height="7" rx="1.8" {...S} />
+            <path d="M7 14.5c0 1.8-1 2.7-1 4.5M12 14.5V20M17 14.5c0 1.8 1 2.7 1 4.5" {...S} />
+          </>
+        ),
+      },
+      {
+        title: 'Refrigerator',
+        desc: 'Repair and servicing for all types.',
+        icon: (
+          <>
+            <rect x="6" y="2.5" width="12" height="19" rx="2" {...S} />
+            <path d="M6 10h12M9 6v1.5M9 13v3" {...S} />
+          </>
+        ),
+      },
+      {
+        title: 'Microwave Oven',
+        desc: 'Expert repair and servicing.',
+        icon: (
+          <>
+            <rect x="2.5" y="6" width="19" height="12" rx="2" {...S} />
+            <rect x="5.5" y="9" width="9" height="6" rx="1" {...S} />
+            <path d="M18 9.5h.01M18 12h.01M18 14.5h.01" {...S} strokeWidth="2.2" />
+          </>
+        ),
+      },
+      {
+        title: 'Washing Machine',
+        desc: 'Repair and servicing for all types.',
+        icon: (
+          <>
+            <rect x="4" y="2.5" width="16" height="19" rx="2" {...S} />
+            <circle cx="12" cy="13.5" r="4.5" {...S} />
+            <path d="M7.5 6h2M15.5 6h.01" {...S} />
+          </>
+        ),
+      },
+      {
+        title: 'Deep Freezer',
+        desc: 'Repair and cooling checks.',
+        icon: (
+          <>
+            <rect x="3" y="8" width="18" height="12" rx="2" {...S} />
+            <path d="M3 12.5h18M9 8V6h6v2M10 16h4" {...S} />
+          </>
+        ),
+      },
+    ],
   },
   {
-    title: 'AC Repair',
-    desc: 'Quick and efficient repair service.',
-    icon: (
-      <path
-        d="M14.7 6.3a3 3 0 0 0-4 4L4 17v3h3l6.7-6.7a3 3 0 0 0 4-4l-2.2 2.2-2-2 2.2-2.2Z"
-        stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" fill="none"
-      />
-    ),
-  },
-  {
-    title: 'AC Maintenance',
-    desc: 'Regular service for better performance.',
-    icon: (
-      <>
-        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.6" fill="none" />
-        <path
-          d="M12 3v2.2M12 18.8V21M21 12h-2.2M5.2 12H3M18 6l-1.6 1.6M7.6 16.4 6 18M18 18l-1.6-1.6M7.6 7.6 6 6"
-          stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"
-        />
-      </>
-    ),
-  },
-  {
-    title: 'Gas Filling',
-    desc: 'Refill & check for optimal cooling.',
-    icon: (
-      <path
-        d="M12 3c2.4 3 4.5 5.7 4.5 8.7A4.5 4.5 0 0 1 12 16.2a4.5 4.5 0 0 1-4.5-4.5C7.5 8.7 9.6 6 12 3Z"
-        stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" fill="none"
-      />
-    ),
-  },
-  {
-    title: 'Uninstallation & Reinstallation',
-    desc: 'Safe and hassle-free service.',
-    icon: (
-      <>
-        <rect x="4" y="8" width="16" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.6" fill="none" />
-        <path d="M8 14v3m8-3v3M10 3l2 2 2-2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" fill="none" />
-      </>
-    ),
+    label: 'Commercial AC Systems',
+    items: [
+      {
+        title: '3 Phase AC',
+        desc: 'Service for three-phase AC units.',
+        icon: <path d="M13 2.5 5 13.5h6l-1 8 8-11h-6l1-8Z" {...S} />,
+      },
+      {
+        title: 'Cassette AC',
+        desc: 'Installation and service for ceiling units.',
+        icon: (
+          <>
+            <rect x="3" y="3" width="18" height="18" rx="2" {...S} />
+            <rect x="7" y="7" width="10" height="10" rx="1.5" {...S} />
+            <circle cx="12" cy="12" r="1.6" {...S} />
+          </>
+        ),
+      },
+      {
+        title: 'Ductable AC',
+        desc: 'Ducted AC installation and service.',
+        icon: (
+          <>
+            <rect x="2.5" y="8" width="9" height="8" rx="1.5" {...S} />
+            <path d="M11.5 10h4.5l4.5-3v10l-4.5-3h-4.5" {...S} />
+          </>
+        ),
+      },
+      {
+        title: 'VRF / VRV AC',
+        desc: 'Multi-zone system service.',
+        icon: (
+          <>
+            <circle cx="12" cy="12" r="2.5" {...S} />
+            <circle cx="5" cy="5" r="2" {...S} />
+            <circle cx="19" cy="5" r="2" {...S} />
+            <circle cx="5" cy="19" r="2" {...S} />
+            <circle cx="19" cy="19" r="2" {...S} />
+            <path d="M6.5 6.5l3.7 3.7M17.5 6.5l-3.7 3.7M6.5 17.5l3.7-3.7M17.5 17.5l-3.7-3.7" {...S} />
+          </>
+        ),
+      },
+      {
+        title: 'Packaged AC',
+        desc: 'Packaged unit installation and service.',
+        icon: (
+          <>
+            <rect x="2.5" y="6" width="19" height="12" rx="2" {...S} />
+            <circle cx="9" cy="12" r="3" {...S} />
+            <path d="M15 9.5h3.5M15 12h3.5M15 14.5h3.5" {...S} />
+          </>
+        ),
+      },
+    ],
   },
 ]
 
@@ -207,38 +278,73 @@ export default function Hero() {
           </svg>
         </div>
 
-        {/* Services Strip */}
-        <div className="bg-white py-12 lg:py-16">
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="mx-auto flex max-w-7xl flex-wrap justify-center gap-y-10 px-6 lg:flex-nowrap lg:divide-x lg:divide-slate-200 lg:px-10"
-          >
-            {SERVICES.map((service) => (
+        {/* Services */}
+        <div className="bg-white py-14 lg:py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center"
+            >
+              <p className="font-sans text-sm font-bold uppercase tracking-[0.2em] text-[#b8860b]">
+                What we service
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-bold text-[#0a2348] sm:text-3xl">
+                Our Services
+              </h2>
+              <span
+                aria-hidden="true"
+                className="mx-auto mt-3 block h-1 w-14 rounded-full"
+                style={{ backgroundColor: GOLD }}
+              />
+            </motion.div>
+
+            {SERVICE_GROUPS.map((group) => (
               <motion.div
-                key={service.title}
-                variants={item}
-                className="group flex basis-1/2 flex-col items-center px-3 text-center sm:basis-1/3 lg:basis-1/5"
+                key={group.label}
+                variants={container}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.15 }}
+                className="mt-10 lg:mt-12"
               >
-                <span
-                  className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg"
-                  style={{ borderColor: GOLD, color: NAVY }}
-                >
-                  <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
-                    {service.icon}
-                  </svg>
-                </span>
-                <h3 className="font-display text-base font-bold text-[#0a2348]">
-                  {service.title}
-                </h3>
-                <p className="mt-1.5 max-w-[160px] font-sans text-sm leading-relaxed text-slate-600">
-                  {service.desc}
-                </p>
+                <motion.div variants={item} className="mb-8 flex items-center gap-4">
+                  <span aria-hidden="true" className="h-px flex-1 bg-slate-200" />
+                  <h3 className="font-display text-sm font-bold uppercase tracking-[0.18em] text-[#0a2348] sm:text-base">
+                    {group.label}
+                  </h3>
+                  <span aria-hidden="true" className="h-px flex-1 bg-slate-200" />
+                </motion.div>
+
+                <div className="flex flex-wrap justify-center gap-y-10 lg:flex-nowrap lg:divide-x lg:divide-slate-200">
+                  {group.items.map((service) => (
+                    <motion.div
+                      key={service.title}
+                      variants={item}
+                      className="group flex basis-1/2 flex-col items-center px-3 text-center sm:basis-1/3 lg:basis-1/5"
+                    >
+                      <span
+                        className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg"
+                        style={{ borderColor: GOLD, color: NAVY }}
+                      >
+                        <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+                          {service.icon}
+                        </svg>
+                      </span>
+                      <h4 className="font-display text-base font-bold text-[#0a2348]">
+                        {service.title}
+                      </h4>
+                      <p className="mt-1.5 max-w-[170px] font-sans text-sm leading-relaxed text-slate-600">
+                        {service.desc}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </MotionConfig>
     </section>
