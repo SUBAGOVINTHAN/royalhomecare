@@ -73,3 +73,19 @@ body {
   border-color: var(--color-gold);
   box-shadow: 0 0 0 3px rgba(217, 164, 48, 0.18);
 }
+
+html {
+  scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip; /* modern browsers use this; older ones fall back to hidden */
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
