@@ -105,7 +105,7 @@ export default function Hero() {
         />
 
         {/* Main Content */}
-        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-6 pb-16 pt-10 lg:grid-cols-2 lg:gap-6 lg:px-10 lg:pb-20 lg:pt-12">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-6 pb-10 pt-6 sm:pb-16 sm:pt-10 lg:grid-cols-2 lg:gap-6 lg:px-10 lg:pb-20 lg:pt-12">
           {/* LEFT - Text */}
           <motion.div
             variants={container}
@@ -115,10 +115,10 @@ export default function Hero() {
           >
             <motion.p
               variants={item}
-              className="mb-5 flex items-center gap-3 font-sans text-sm font-bold uppercase tracking-[0.2em]"
+              className="mb-4 flex items-center gap-2 whitespace-nowrap font-sans text-xs font-bold uppercase tracking-[0.16em] sm:mb-5 sm:gap-3 sm:text-sm sm:tracking-[0.2em]"
               style={{ color: GOLD_BRIGHT }}
             >
-              <span aria-hidden="true" className="h-[2px] w-8" style={{ backgroundColor: GOLD_BRIGHT }} />
+              <span aria-hidden="true" className="hidden h-[2px] w-8 sm:block" style={{ backgroundColor: GOLD_BRIGHT }} />
               Cool Spaces
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: GOLD_BRIGHT }} />
               Better Living
@@ -126,7 +126,7 @@ export default function Hero() {
 
             <motion.h1
               variants={item}
-              className="font-display text-[2.5rem] font-bold leading-[1.12] tracking-tight text-white sm:text-5xl lg:text-[3.1rem]"
+              className="font-display text-[1.8rem] font-bold leading-[1.15] tracking-tight text-white min-[400px]:text-[2.1rem] sm:text-5xl lg:text-[3.1rem]"
             >
               Complete AC &amp; Home
               <br />
@@ -137,16 +137,16 @@ export default function Hero() {
 
             <motion.p
               variants={item}
-              className="mt-6 max-w-xl font-sans text-base leading-relaxed text-white/90 sm:text-lg"
+              className="mt-4 max-w-xl font-sans text-[15px] leading-relaxed text-white/90 sm:mt-6 sm:text-lg"
             >
               From AC installation and repair to refrigerator, washing machine, microwave oven
               and commercial AC services, we deliver reliable solutions for your home and business.
             </motion.p>
 
-            <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
+            <motion.div variants={item} className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <a
                 href="#contact"
-                className="focus-ring inline-flex items-center gap-2.5 rounded-full px-8 py-4 font-sans text-base font-bold shadow-lg shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                className="focus-ring inline-flex w-full items-center justify-center gap-2.5 rounded-full px-8 py-4 font-sans text-base font-bold shadow-lg sm:w-auto shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
                 style={{ backgroundColor: GOLD_BRIGHT, color: NAVY }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -159,7 +159,7 @@ export default function Hero() {
 
               <a
                 href={PHONE_HREF}
-                className="focus-ring inline-flex items-center gap-2.5 rounded-full border-2 border-white/60 px-7 py-[0.9rem] font-sans text-base font-semibold text-white transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
+                className="focus-ring inline-flex w-full items-center justify-center gap-2.5 rounded-full border-2 border-white/60 px-7 py-[0.9rem] sm:w-auto font-sans text-base font-semibold text-white transition-all hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path
@@ -214,13 +214,13 @@ export default function Hero() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-6 sm:grid-cols-3 lg:grid-cols-5 lg:divide-x lg:divide-slate-200 lg:px-10"
+            className="mx-auto flex max-w-7xl flex-wrap justify-center gap-y-10 px-6 lg:flex-nowrap lg:divide-x lg:divide-slate-200 lg:px-10"
           >
             {SERVICES.map((service) => (
               <motion.div
                 key={service.title}
                 variants={item}
-                className="group flex flex-col items-center px-3 text-center"
+                className="group flex basis-1/2 flex-col items-center px-3 text-center sm:basis-1/3 lg:basis-1/5"
               >
                 <span
                   className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg"
