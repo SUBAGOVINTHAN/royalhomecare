@@ -4,6 +4,7 @@ import Services from './components/Services'
 import Clients from './components/Clients'
 import Process from './components/Process'
 import About from './components/About'
+import Reviews from './components/Reviews'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import StickyContactBar from './components/StickyContactBar'
@@ -18,6 +19,7 @@ export default function App() {
         <Clients />
         <Process />
         <About />
+        <Reviews />
         <Contact />
       </main>
       <Footer />
