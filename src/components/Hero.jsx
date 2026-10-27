@@ -125,28 +125,32 @@ export default function Hero() {
             </motion.div>
 
             {/* More numbers */}
+            {/* Mobile: label on top, numbers in 2 columns (1 column on very small screens).
+                Desktop: everything on one line. */}
             <motion.div
               variants={item}
-              className="mt-4 flex flex-wrap items-center gap-2.5 sm:mt-5"
+              className="mt-4 sm:mt-5 sm:flex sm:flex-wrap sm:items-center sm:gap-2.5"
             >
-              <span className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
+              <p className="mb-2 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-white/60 sm:mb-0 sm:text-left sm:text-xs">
                 Also call
-              </span>
-              {MORE_PHONES.map((p) => (
-                <a
-                  key={p.href}
-                  href={p.href}
-                  className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-3.5 py-1.5 font-sans text-sm font-semibold text-white/90 transition-all hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10 hover:text-white"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ color: GOLD_BRIGHT }}>
-                    <path
-                      d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  {p.display}
-                </a>
-              ))}
+              </p>
+              <div className="grid grid-cols-1 gap-2.5 min-[380px]:grid-cols-2 sm:flex sm:flex-wrap">
+                {MORE_PHONES.map((p) => (
+                  <a
+                    key={p.href}
+                    href={p.href}
+                    className="focus-ring inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/25 bg-white/5 px-3 py-2.5 font-sans text-[13px] font-semibold text-white/90 transition-all hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10 hover:text-white sm:px-3.5 sm:py-1.5 sm:text-sm"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="shrink-0" style={{ color: GOLD_BRIGHT }}>
+                      <path
+                        d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    {p.display}
+                  </a>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
 
