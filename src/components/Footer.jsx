@@ -38,7 +38,7 @@ export default function Footer() {
         style={{ background: 'linear-gradient(90deg, #f0c14b, #e8a317)' }}
       />
 
-      <div className="mx-auto max-w-7xl px-6 pb-24 pt-14 sm:pb-8 lg:px-10 lg:pt-16">
+      <div className="mx-auto max-w-7xl px-6 pb-24 pt-14 lg:px-10 lg:pb-8 lg:pt-16">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1fr_1.3fr] lg:gap-10">
           {/* Brand */}
           <div>
