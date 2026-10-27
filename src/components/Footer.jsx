@@ -25,6 +25,7 @@ const SERVICE_LINKS = [
   'Washing Machine',
   'Microwave Oven',
   'Deep Freezer',
+   'Water Heater',
   'Commercial AC Systems',
 ]
 

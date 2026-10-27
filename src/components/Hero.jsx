@@ -86,8 +86,8 @@ export default function Hero() {
               variants={item}
               className="mt-4 max-w-xl font-sans text-[15px] leading-relaxed text-white/90 sm:mt-6 sm:text-lg"
             >
-              From AC installation and repair to refrigerator, washing machine, microwave oven
-              and commercial AC services, we deliver reliable solutions for your home and business.
+              From AC installation and repair to refrigerator, washing machine, microwave oven,
+             water heater and commercial AC services, we deliver reliable solutions for your home and business.
             </motion.p>
 
             <motion.div variants={item} className="mt-6 flex flex-col gap-2.5 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">

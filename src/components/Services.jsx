@@ -16,6 +16,7 @@ import photoCassette from '../assets/services/cassette-ac.jpg'
 import photoDuctable from '../assets/services/ductable-ac.jpg'
 import photoVrf from '../assets/services/vrf-vrv-ac.jpg'
 import photoPackaged from '../assets/services/packaged-ac.jpg'
+import photoWaterHeater from '../assets/services/water-heater.jpg'
 
 const FILTERS = [
   { id: 'all', label: 'All Services' },
@@ -73,6 +74,14 @@ const SERVICES = [
     desc: 'Cooling and compressor checks, gas refilling and thermostat repairs for chest and upright freezers.',
     photo: photoFreezer,
     pos: '65% center',
+  },
+
+    {
+    title: 'Water Heater',
+    group: 'home',
+    desc: 'No heating, tripping, leakage and thermostat or heating element faults repaired for storage and instant water heaters.',
+    photo: photoWaterHeater,
+    pos: '60% center',
   },
 
   // Commercial AC systems
