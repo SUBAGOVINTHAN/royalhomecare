@@ -8,6 +8,12 @@ const NAVY = '#0a2348'
 const PHONE_DISPLAY = '+91 95001 60491'
 const PHONE_HREF = 'tel:+919500160491'
 
+// Extra numbers shown under the buttons
+const MORE_PHONES = [
+  { display: '+91 97898 43950', href: 'tel:+919789843950' },
+  { display: '+91 80722 90254', href: 'tel:+918072290254' },
+]
+
 const container = {
   hidden: {},
   show: {
@@ -116,6 +122,31 @@ export default function Hero() {
                 </svg>
                 {PHONE_DISPLAY}
               </a>
+            </motion.div>
+
+            {/* More numbers */}
+            <motion.div
+              variants={item}
+              className="mt-4 flex flex-wrap items-center gap-2.5 sm:mt-5"
+            >
+              <span className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
+                Also call
+              </span>
+              {MORE_PHONES.map((p) => (
+                <a
+                  key={p.href}
+                  href={p.href}
+                  className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-3.5 py-1.5 font-sans text-sm font-semibold text-white/90 transition-all hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10 hover:text-white"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ color: GOLD_BRIGHT }}>
+                    <path
+                      d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  {p.display}
+                </a>
+              ))}
             </motion.div>
           </motion.div>
 
