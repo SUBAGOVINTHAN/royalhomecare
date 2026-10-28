@@ -1,7 +1,6 @@
 import { motion, MotionConfig } from 'framer-motion'
 import technicianPhoto from '../assets/hero-technician.png'
 
-const GOLD = '#f0c14b'
 const GOLD_BRIGHT = '#ffd35c'
 const NAVY = '#0a2348'
 
@@ -93,7 +92,7 @@ export default function Hero() {
               className="mt-4 max-w-xl font-sans text-[15px] leading-relaxed text-white/90 sm:mt-6 sm:text-lg"
             >
               From AC installation and repair to refrigerator, washing machine, microwave oven,
-             water heater and commercial AC services, we deliver reliable solutions for your home and business.
+              water heater and commercial AC services, we deliver reliable solutions for your home and business.
             </motion.p>
 
             <motion.div variants={item} className="mt-6 flex flex-col gap-2.5 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
@@ -176,16 +175,26 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Wave */}
+        {/* Soft layered waves: the navy fades into the cream Services section instead of ending on a hard edge */}
         <div className="relative">
           <svg
-            viewBox="0 0 1440 90"
+            viewBox="0 0 1440 140"
             preserveAspectRatio="none"
             aria-hidden="true"
-            className="relative -mb-1 h-14 w-full lg:h-16"
+            className="relative -mb-1 block h-20 w-full lg:h-28"
           >
-            <path d="M0 90 C 360 20, 1080 20, 1440 90 L1440 90 L0 90 Z" fill="#ffffff" />
-            <path d="M0 86 C 360 18, 1080 18, 1440 86" fill="none" stroke={GOLD} strokeWidth="3" />
+            <path
+              d="M0 78 C 240 18, 480 18, 720 58 C 960 98, 1200 98, 1440 48 L1440 140 L0 140 Z"
+              style={{ fill: 'var(--color-cream, #faf6ef)', opacity: 0.22 }}
+            />
+            <path
+              d="M0 102 C 300 52, 600 52, 900 86 C 1100 108, 1300 100, 1440 76 L1440 140 L0 140 Z"
+              style={{ fill: 'var(--color-cream, #faf6ef)', opacity: 0.5 }}
+            />
+            <path
+              d="M0 122 C 360 72, 1080 72, 1440 122 L1440 140 L0 140 Z"
+              style={{ fill: 'var(--color-cream, #faf6ef)' }}
+            />
           </svg>
         </div>
       </MotionConfig>

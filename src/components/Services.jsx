@@ -76,7 +76,7 @@ const SERVICES = [
     pos: '65% center',
   },
 
-    {
+  {
     title: 'Water Heater',
     group: 'home',
     desc: 'No heating, tripping, leakage and thermostat or heating element faults repaired for storage and instant water heaters.',
@@ -198,10 +198,11 @@ export default function Services() {
           })}
         </div>
 
-        {/* 2 columns on mobile, 2 on tablet, 3 on desktop */}
+        {/* 2 columns on mobile and tablet, 3 on desktop.
+            Flex + justify-center keeps an odd last card centered in its row. */}
         <motion.div
           key={filter}
-          className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-6 lg:grid-cols-3"
+          className="mt-8 flex flex-wrap justify-center gap-3 sm:mt-10 sm:gap-6"
           initial="hidden"
           animate="show"
           variants={grid}
@@ -212,7 +213,7 @@ export default function Services() {
               variants={card}
               whileHover={{ y: -6 }}
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-              className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_16px_rgba(11,42,91,0.08)] transition-shadow duration-300 hover:shadow-[0_18px_40px_rgba(11,42,91,0.16)] sm:rounded-3xl"
+              className="group relative flex min-w-0 basis-[calc(50%_-_0.375rem)] flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_16px_rgba(11,42,91,0.08)] transition-shadow duration-300 hover:shadow-[0_18px_40px_rgba(11,42,91,0.16)] sm:basis-[calc(50%_-_0.75rem)] sm:rounded-3xl lg:basis-[calc(33.333%_-_1rem)]"
             >
               {/* Photo */}
               <div className="relative aspect-[4/3] overflow-hidden">
