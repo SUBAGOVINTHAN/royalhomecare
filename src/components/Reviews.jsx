@@ -1,6 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
-import { addDoc, collection, limit, onSnapshot, query, serverTimestamp, where } from 'firebase/firestore'
+import {
+  addDoc,
+  average as fsAverage,
+  collection,
+  count as fsCount,
+  getAggregateFromServer,
+  limit,
+  onSnapshot,
+  query,
+  serverTimestamp,
+  where,
+} from 'firebase/firestore'
 import { db } from '../firebase'
 
 const SERVICES = [
@@ -33,17 +44,38 @@ function maskEmail(email) {
 
 export default function Reviews() {
   const [reviews, setReviews] = useState([])
+  const [totals, setTotals] = useState(null) // { count, average } for ALL approved reviews
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState(false)
   const [visible, setVisible] = useState(PAGE_SIZE)
 
-  // Live listener: new approved reviews appear without refreshing the page
+  // Live listener: a review shows up the moment it is approved, and the total updates with it
   useEffect(() => {
     if (!db) {
       setLoading(false)
       return undefined
     }
-    const q = query(collection(db, 'reviews'), where('approved', '==', true), limit(60))
+
+    const approvedOnly = query(collection(db, 'reviews'), where('approved', '==', true))
+    const q = query(approvedOnly, limit(60))
+    let cancelled = false
+
+    // Total count and average of every approved review (not only the ones loaded on the page)
+    const loadTotals = async () => {
+      try {
+        const agg = await getAggregateFromServer(approvedOnly, {
+          total: fsCount(),
+          avg: fsAverage('rating'),
+        })
+        if (cancelled) return
+        const { total, avg } = agg.data()
+        setTotals({ count: total, average: avg || 0 })
+      } catch (err) {
+        // Older Firebase version or rules: fall back to counting the loaded reviews
+        console.warn('Could not load review totals:', err)
+      }
+    }
+
     const unsubscribe = onSnapshot(
       q,
       (snap) => {
@@ -53,20 +85,26 @@ export default function Reviews() {
         setReviews(list)
         setLoadError(false)
         setLoading(false)
+        loadTotals() // runs again every time a review is approved or removed
       },
       () => {
         setLoadError(true)
         setLoading(false)
       },
     )
-    return unsubscribe
+
+    return () => {
+      cancelled = true
+      unsubscribe()
+    }
   }, [])
 
   const { average, count } = useMemo(() => {
+    if (totals) return totals
     if (!reviews.length) return { average: 0, count: 0 }
     const total = reviews.reduce((sum, r) => sum + (r.rating || 0), 0)
     return { average: total / reviews.length, count: reviews.length }
-  }, [reviews])
+  }, [reviews, totals])
 
   // Not set up yet: show a hint while developing, nothing to customers
   if (!db) {
@@ -108,7 +146,7 @@ export default function Reviews() {
               What our customers say
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/75">
-              Used our service? Share your experience. New reviews appear here after we approve them.
+              Used our service? Share your experience with us.
             </p>
 
             {count > 0 && (
@@ -488,7 +526,7 @@ function ReviewForm() {
             exit={{ opacity: 0, y: -8 }}
             className="mt-4 rounded-xl bg-green-50 px-4 py-3 text-center text-sm font-medium text-green-800"
           >
-            Thank you! Your review was sent and will appear here once approved.
+            Thank you! Your review has been submitted.
           </motion.p>
         )}
         {status === 'error' && (
