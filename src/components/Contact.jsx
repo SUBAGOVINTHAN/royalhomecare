@@ -5,6 +5,8 @@ const PHONE_DISPLAY = '+91 95001 60491'
 const PHONE_HREF = 'tel:+919500160491'
 const WHATSAPP_NUMBER = '919500160491' // country code + number, no "+" or spaces
 const WHATSAPP_CHAT_HREF = `https://wa.me/${WHATSAPP_NUMBER}`
+const MAP_HREF =
+  'https://www.google.com/maps/search/?api=1&query=3%2F930+Pillaiyar+Kovil+St+NJK+Avenue+Mettukuppam+Thuraipakkam+Chennai+600097'
 
 const APPLIANCE_GROUPS = [
   {
@@ -189,7 +191,7 @@ export default function Contact() {
                 variants={item}
                 className="mt-4 max-w-md text-base leading-relaxed text-white/90"
               >
-                Looking for reliable service for your air conditioner or home appliances? From refrigerators, washing machines and water heaters to advanced commercial AC systems, our team is here to help.
+                Looking for reliable service for your air conditioner or home appliances in Chennai? From refrigerators, washing machines and water heaters to advanced commercial AC systems, our team is here to help.
               </motion.p>
 
               <div className="mt-10 space-y-6">
@@ -239,6 +241,25 @@ export default function Contact() {
                   <span className="leading-tight">
                     <span className="block text-xs text-white/70">WhatsApp</span>
                     <span className="mt-0.5 block text-base font-semibold">Chat with us</span>
+                  </span>
+                </motion.a>
+
+                <motion.a
+                  variants={item}
+                  whileHover={{ x: 6 }}
+                  href={MAP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring group flex items-center gap-4 rounded text-white"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-white/20">
+                    <IconPin className="h-5 w-5" style={{ color: 'var(--color-gold-light)' }} />
+                  </span>
+                  <span className="leading-tight">
+                    <span className="block text-xs text-white/70">Visit us</span>
+                    <span className="mt-0.5 block text-sm font-semibold">
+                      3/930 Pillaiyar Kovil St, NJK Avenue, Mettukuppam, Thuraipakkam, Chennai 600097
+                    </span>
                   </span>
                 </motion.a>
 
@@ -762,6 +783,20 @@ function IconPhone(props) {
         strokeWidth="1.6"
         strokeLinejoin="round"
       />
+    </svg>
+  )
+}
+
+function IconPin(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" strokeWidth="1.6" />
     </svg>
   )
 }

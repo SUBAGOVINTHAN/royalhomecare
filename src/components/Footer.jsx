@@ -3,12 +3,16 @@ import logo from '../assets/logo.jpeg'
 const EMAIL = 'royalhomecare2026@gmail.com'
 
 const PHONES = [
+  { display: '+91 95001 60491', href: 'tel:+919500160491' },
   { display: '+91 97898 43950', href: 'tel:+919789843950' },
   { display: '+91 80722 90254', href: 'tel:+918072290254' },
 ]
 
 const WHATSAPP_HREF =
   'https://wa.me/919500160491?text=Hi%20Royal%20Home%20Care%2C%20I%20would%20like%20to%20book%20a%20service.'
+
+const MAP_HREF =
+  'https://www.google.com/maps/search/?api=1&query=3%2F930+Pillaiyar+Kovil+St+NJK+Avenue+Mettukuppam+Thuraipakkam+Chennai+600097'
 
 const QUICK_LINKS = [
   { href: '#top', label: 'Home' },
@@ -25,7 +29,7 @@ const SERVICE_LINKS = [
   'Washing Machine',
   'Microwave Oven',
   'Deep Freezer',
-   'Water Heater',
+  'Water Heater',
   'Commercial AC Systems',
 ]
 
@@ -61,8 +65,9 @@ export default function Footer() {
               </span>
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/70">
-              Reliable AC and home appliance service for homes and businesses, with
-              upfront quotes and technicians who explain the work before they start.
+              Reliable AC and home appliance service for homes and businesses in
+              Chennai, with upfront quotes and technicians who explain the work
+              before they start.
             </p>
 
             <a
@@ -150,6 +155,26 @@ export default function Footer() {
 
               <li className="flex items-start gap-3">
                 <IconBadge>
+                  <IconPin className="h-4 w-4" />
+                </IconBadge>
+                <address className="mt-1.5 not-italic leading-relaxed text-white/75">
+                  <a
+                    href={MAP_HREF}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="focus-ring rounded transition-colors hover:text-white"
+                  >
+                    3/930 Pillaiyar Kovil St, NJK Avenue,
+                    <br />
+                    Mettukuppam, Thuraipakkam,
+                    <br />
+                    Chennai 600097
+                  </a>
+                </address>
+              </li>
+
+              <li className="flex items-start gap-3">
+                <IconBadge>
                   <IconClock className="h-4 w-4" />
                 </IconBadge>
                 <div className="mt-1.5 text-white/75">
@@ -232,6 +257,20 @@ function IconPhone(props) {
         strokeWidth="1.6"
         strokeLinejoin="round"
       />
+    </svg>
+  )
+}
+
+function IconPin(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="9.5" r="2.5" stroke="currentColor" strokeWidth="1.6" />
     </svg>
   )
 }

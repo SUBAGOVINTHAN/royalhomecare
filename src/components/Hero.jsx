@@ -84,7 +84,7 @@ export default function Hero() {
               <br />
               <span style={{ color: GOLD_BRIGHT }}>Appliance Services</span>
               <br />
-              at Your Doorstep
+              in Chennai, at Your Doorstep
             </motion.h1>
 
             <motion.p
@@ -169,7 +169,8 @@ export default function Hero() {
 
             <img
               src={technicianPhoto}
-              alt="Royal Home Care technician servicing an AC"
+              alt="Royal Home Care technician servicing a split AC in Chennai"
+              fetchPriority="high"
               className="relative z-10 mx-auto w-full rounded-2xl shadow-2xl"
             />
           </motion.div>
